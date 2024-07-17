@@ -9,7 +9,7 @@ const session = require('express-session');
 require('dotenv').config();
 
 const app = express();
-const PORT = process.env.PORT || 0.0.0.0;
+const PORT = process.env.PORT || 3000;
 
 // Set view engine
 app.set('view engine', 'ejs');
@@ -166,6 +166,6 @@ mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTop
     .catch(err => console.log('MongoDB connection error:', err));
 
 // Start the server
-app.listen(PORT, () => {
+app.listen(PORT, '0.0.0.0',() => {
     console.log(`Server is running on http://localhost:${PORT}`);
 });
