@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Driver Dashboard</title>
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            background-color: #e0f7fa;
+            margin: 0;
+            padding: 20px;
+        }
+        /* Add additional styles as needed */
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Driver Dashboard</h1>
+        <a href="/">Logout</a>
+    </header>
+
+    <h2>Cab Booking Form</h2>
+    <form id="bookingForm">
+        <div>
+            <label for="date">Date:</label>
+            <input type="date" id="date" name="date" required>
+        </div>
+        <div>
+            <label for="driverId">Driver ID:</label>
+            <input type="text" id="driverId" name="driverId" required>
+        </div>
+        <div>
+            <label for="driverName">Driver Name:</label>
+            <input type="text" id="driverName" name="driverName" required>
+        </div>
+        <div>
+            <label for="cabNumber">Cab Number:</label>
+            <input type="text" id="cabNumber" name="cabNumber" required>
+        </div>
+        <div>
+            <label for="passengerName">Passenger Name:</label>
+            <input type="text" id="passengerName" name="passengerName" required>
+        </div>
+        <div>
+            <label for="pickupLocation">Pickup Location:</label>
+            <input type="text" id="pickupLocation" name="pickupLocation" required>
+        </div>
+        <div>
+            <label for="dropoffLocation">Drop-off Location:</label>
+            <input type="text" id="dropoffLocation" name="dropoffLocation" required>
+        </div>
+        <div>
+            <label for="pickupTime">Time to Pick Up:</label>
+            <input type="time" id="pickupTime" name="pickupTime" required>
+        </div>
+        <div>
+            <label for="dropoffTime">Time to Drop Off:</label>
+            <input type="time" id="dropoffTime" name="dropoffTime" required>
+        </div>
+        <div>
+            <label for="notes">Notes:</label>
+            <textarea id="notes" name="notes" rows="4"></textarea>
+        </div>
+        <button type="submit">Submit Booking</button>
+    </form>
+
+    <script>
+        const form = document.getElementById('bookingForm');
+        form.addEventListener('submit', async (event) => {
+            event.preventDefault();
+            const formData = new FormData(form);
+            const data = Object.fromEntries(formData);
+
+            try {
+                const response = await fetch('/api/bookings', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data),
+                });
+
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+
+                const result = await response.json();
+                alert('Booking saved successfully!');
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Error submitting booking. Please try again.');
+            }
+        });
+    </script>
+</body>
+</html>

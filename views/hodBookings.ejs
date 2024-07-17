@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Bookings</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f4f8;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            color: #00796b;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #00796b;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <h1>Your Bookings</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Driver ID</th>
+                <th>Driver Name</th>
+                <th>Cab Number</th>
+                <th>Passenger Name</th>
+                <th>Pickup Location</th>
+                <th>Drop-off Location</th>
+                <th>Pickup Time</th>
+                <th>Drop-off Time</th>
+                <th>Notes</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% bookings.forEach(booking => { %>
+                <tr>
+                    <td><%= booking.date.toISOString().split('T')[0] %></td>
+                    <td><%= booking.driverId %></td>
+                    <td><%= booking.driverName %></td>
+                    <td><%= booking.cabNumber %></td>
+                    <td><%= booking.passengerName %></td>
+                    <td><%= booking.pickupLocation %></td>
+                    <td><%= booking.dropoffLocation %></td>
+                    <td><%= booking.pickupTime %></td>
+                    <td><%= booking.dropoffTime %></td>
+                    <td><%= booking.notes %></td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
+    <a href="/views/driver.ejs">Back to Dashboard</a>
+</body>
+</html>

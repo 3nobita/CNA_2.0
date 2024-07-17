@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User List</title>
+    <style>
+        /* Add your CSS styles here */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>User List</h1>
+
+        <!-- Search form -->
+        <form action="/api/users/search" method="get">
+            <input type="text" name="query" placeholder="Search by User ID or Name" required>
+            <button type="submit">Search</button>
+        </form>
+
+        <h2>Total Users: <%= users.length %></h2>
+        <h2>Total Admins: <%= adminCount %></h2>
+        <h2>Total HODs: <%= hodCount %></h2>
+        <h2>Total Drivers: <%= driverCount %></h2>
+        <h2>Total Employees: <%= employeeCount %></h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>User ID</th>
+                    <th>Name</th>
+                    <th>Role</th>
+                    <th>Department</th>
+                    <th>Password</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% users.forEach(user => { %>
+                <tr>
+                    <td><%= user.userId %></td>
+                    <td><%= user.name %></td>
+                    <td><%= user.role %></td>
+                    <td><%= user.department %></td>
+                    <td><%= user.password %></td>
+                    <td>
+                        <a href="/api/users/edit/<%= user.userId %>">Edit</a>
+                        <form action="/api/users/delete/<%= user.userId %>" method="post" style="display:inline;">
+                            <button type="submit">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+                <% }) %>
+            </tbody>
+        </table>
+        <a href="/api/users/add-new">Add New User</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Bookings</title>
+</head>
+<body>
+    <h1>Your Bookings</h1>
+    <a href="/logout">Logout</a>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Passenger Name</th>
+                <th>Pickup Location</th>
+                <th>Drop-off Location</th>
+                <th>Pickup Time</th>
+                <th>Drop-off Time</th>
+                <th>Notes</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% bookings.forEach(booking => { %>
+                <tr>
+                    <td><%= booking.date.toDateString() %></td>
+                    <td><%= booking.passengerName %></td>
+                    <td><%= booking.pickupLocation %></td>
+                    <td><%= booking.dropoffLocation %></td>
+                    <td><%= booking.pickupTime.toLocaleString() %></td>
+                    <td><%= booking.dropoffTime.toLocaleString() %></td>
+                    <td><%= booking.notes %></td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
+</body>
+</html>
